@@ -1,0 +1,4 @@
+* .pyc
+pycache/
+virtual/
+db.sqlite3
