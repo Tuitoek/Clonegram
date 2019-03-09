@@ -1,4 +1,4 @@
 * .pyc
-pycache/
+__pycache__/
 virtual/
 db.sqlite3
