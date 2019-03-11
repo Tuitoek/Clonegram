@@ -1,18 +1,21 @@
-{%load bootstrap3%}
+{% load bootstrap3 %}
+{% load static%}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
 <head>
   <meta charset="utf-8">
   <title>CloneGram</title>
-  {%bock styles%}
+  {%block styles%}
   {%bootstrap_css%}
+   <link rel="stylesheet" href="{% static 'css/gram.css' %}">
   {%endblock%}
 </head>
 
 <body>
-  {%block content%}
-  {%end block%}
+  {%include "navbar.html"%}
+  <br>
+  <br>
   {% block scripts %}
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   {% bootstrap_javascript %}
