@@ -1,11 +1,40 @@
 {%extends 'base.html'%}
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
+{% load bootstrap3 %}
+{%load static%}
 
-  </body>
-</html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {%block styles%}
+  {%bootstrap_css%}
+  <link rel="stylesheet" href="{% static 'css/gram.css' %}">
+  {%endblock%}
+  <title></title>
+</head>
+
+<body>
+  {%block content%}
+  <div class="row" style="display:flex;justify-content:space-evenly">
+    <div class="col-md-5">
+      <div class="panel">
+        <div class="panel-heading">
+          <p style="color:white;">Tuitoek</p>
+        </div>
+        <div class="panel-body">
+          <img src="https://images.unsplash.com/photo-1472393365320-db77a5abbecc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60">
+        </div>
+        <div class="panel-footer" style="display:flex;justify-content:space-evenly;">
+          <p>Comments</p>
+          <i style="font-size:15px;" class="glyphicon glyphicon-heart-empty"></i>
+          <i  style="font-size:15px;" class="glyphicon glyphicon-bookmark"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}
+  {% block scripts %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  {% bootstrap_javascript %}
+  {%endblock%}
+
+</body>
