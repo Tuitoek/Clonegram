@@ -1,0 +1,17 @@
+i{
+  font-size: 50px;
+}
+li{
+  list-style-type: none;
+  font-size: 50px;
+}
+li a span{
+  color:black;
+  font-size: 30px;
+}
+.panel{
+  background-color: black;
+}
+.panel .panel-heading .username{
+  color:white;
+}
