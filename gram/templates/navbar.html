@@ -16,21 +16,41 @@
 {%endblock%}
 
 <body>
-  <div class="nav navbar light">
-    <nav>
+  <div class="row">
+    <!--The search form above-->
+    <div class="col-sm-6 col-md-6">
+      {% if user.is_authenticated %}
       <ul>
-        <li align="center"><a class="navbar-brand" href="#"><span class="glyphicon glyphicon-camera">CloneGram</span> </a></li>
-          <li style="float:right;"><a class="navbar-brand" href="#"><span class="glyphicon glyphicon-user">User</span></a></li>
-          <li style="float:right;"><a  class="navbar-brand" href="#"><span class="glyphicon glyphicon-heart">Likes</span> </a> </li>
-
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button" aria-expanded="false">Account
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li>
+              <a href="{%url 'newsToday'%}">Home</a>
+            </li>
+            <li>
+              <a href="/accounts/password/change">Change Password</a>
+            </li>
+            <li>
+              <a href="/logout">Logout</a>
+            </li>
+          </ul>
+        </li>
       </ul>
+      {% else %}
+      <li>
+        <a class='btn btn-default' href="/accounts/login">Login</a>
+      </li>
 
-    </nav>
-    {% block scripts %}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    {% bootstrap_javascript %}
-    {% endblock %}
+      {% endif %}
+    </div>
   </div>
+  {% block scripts %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  {% bootstrap_javascript %}
+  {% endblock %}
+
 </body>
 
 </html>
