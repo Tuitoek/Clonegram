@@ -1,12 +1,36 @@
+{% load bootstrap3 %}
+{% load static%}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  {%block content%}
-  {%endblock%}
-  <body>
 
-  </body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {%block styles%}
+  {%bootstrap_css%}
+  <link rel="stylesheet" href="{% static 'css/gram.css' %}">
+  {%endblock%}
+  <title>CloneGram</title>
+</head>
+{%block content%}
+{%endblock%}
+
+<body>
+  <div class="nav navbar light">
+    <nav>
+      <ul>
+        <li align="center"><a class="navbar-brand" href="#"><span class="glyphicon glyphicon-camera">CloneGram</span> </a></li>
+          <li style="float:right;"><a class="navbar-brand" href="#"><span class="glyphicon glyphicon-user">User</span></a></li>
+          <li style="float:right;"><a  class="navbar-brand" href="#"><span class="glyphicon glyphicon-heart">Likes</span> </a> </li>
+
+      </ul>
+
+    </nav>
+    {% block scripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    {% bootstrap_javascript %}
+    {% endblock %}
+  </div>
+</body>
+
 </html>
