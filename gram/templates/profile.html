@@ -1,4 +1,5 @@
 {% load bootstrap3 %}
+{%load crispy_forms_tags%}
 {%load static%}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -15,34 +16,91 @@
 
 <body>
   {%block content%}
-  <nav>
-    <ul>
-      <li align="center"><a class="navbar-brand" href="#"><span class="glyphicon glyphicon-camera">CloneGram</span> </a></li>
-      <li style="float:right;"><a class="navbar-brand" href="#"><span class="glyphicon glyphicon-user">User</span></a></li>
-      <li style="float:right;"><a class="navbar-brand" href="#"><span class="glyphicon glyphicon-heart">Likes</span> </a> </li>
-    </ul>
-  </nav>
-  <br>
-  <br>
+  <div class="nav navbar light">
+    <nav>
+      <a style="color:black;" class="navbar-brand" href="#"><span class="glyphicon glyphicon-camera">| CloneGram</span></a>
+      <a style="color:black;" class="navbar-brand" href="profile/"><span class="glyphicon glyphicon-user">User</span></a>
+      <a style="color:black;" class="navbar-brand" href="#"><span class="glyphicon glyphicon-heart">Likes</span> </a>
+      <div class="col-sm-4 col-md-4 navbar-right">
+
+        <form class="navbar-form" role="search" action="">
+
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search by Category or Locatiion" name="article">
+            <div class="input-group-btn">
+              <button class="btn btn-default" type="submit"><i style="font-size:16px;" class="glyphicon glyphicon-search"></i></button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+
+  </div>
   <br>
   <div class="row">
+    <div class="col-md-6" style="padding:20px;" align="center">
+      <img style="border-radius:70%;" src="{{user.profile.dpicture.url}}" height=200px width=200px>
+      <p> Bio :{{user.profile.bio}}</p>
+      <p>@{{user.username}}</p>
+      <p>{{user.bio}}</p>
+      <div class="show" style="display:inline-block;">
+        <p>1<br>Posts</p>
+        <p>{{followers}}<br>Followers </p>
+        <p>{{following}}<br>Following </p>
+      </div>
+    </div>
     <div class="col-md-4">
-      <img style="border-radius:70%;" src="https://images.unsplash.com/photo-1547570113-7f81920dc868?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"  width=300px alt="">
+      <form method="POST" enctype="multipart/form-data">
+        {%csrf_token%}
+        <fieldset class="form-group">
+          <legend class="border-bottom mb-4">Profile Info</legend>
+          {{u_form|crispy}}
+          {{p_form|crispy}}
+        </fieldset>
+        <div class="form-group">
+          <button type="submit" class="btn btn-outline-info" name="button">Update</button>
+        </div>
+
+      </form>
     </div>
-    <div class="col-md-6" style="display:flex;justify-content:center;padding:20px;">
-        <p style="font-size:40px;">tui_toek</p>
-        <br>
-        <button class="btn btn-basic" type="button" name="button">Edit Profile</button>
-        <br>
-        <a style="color:black" href="#"><i class="glyphicon glyphicon-cog"></i></a>
-    </div>
+
   </div>
-    <hr style="color:black;">
-  {%endblock%}
-  {% block scripts %}
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  {% bootstrap_javascript %}
-  {%endblock%}
+
+  <hr style="color:black;">
+  <h3>Posts</h3>
+  <div class="row">
+    <div class="row" style="display:flex;justify-content:space-evenly">
+      <div class="col-md-5" align="center">
+        <div class="panel" style="background-color:black;">
+          <div class="panel-heading">
+            <div style="display:flex;justify-content:flex-start;">
+              <img style="border-radius:70%;" src="{{user.profile.dpicture.url}}" height=30px width=30px>
+              <p style="color:white;"> @{{user.username}}</p>
+            </div>
+
+          </div>
+          <div class="panel-body">
+            <img src="{{user.image.image_path.url}}" height=500px width=500px>
+            <p>{{images_item.bio}}</p>
+          </div>
+          <div class="panel-footer" style="display:flex;justify-content:space-evenly;">
+
+            <p>Comments {{user.image.comments}}</p>
+            <form method="POST" enctype="multipart/form-data">
+              {%csrf_token%}
+              <fieldset class="form-group">
+                {{comment_form|crispy}}
+              </fieldset>
+              <div class="form-group">
+                <button type="submit" class="btn btn-outline-info" name="button">Post Comment</button>
+              </div>
+          </div>
+
+          {%endblock%}
+          {% block scripts %}
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+          {% bootstrap_javascript %}
+          {%endblock%}
 
 </body>
 

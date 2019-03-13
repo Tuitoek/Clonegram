@@ -1,4 +1,4 @@
-{%extends 'all-news/base.html'%}
+{%extends 'base.html'%}
 {% block content %}
 <div class="container">
 
@@ -14,9 +14,10 @@
   <div class="row">
 
   {% if users %}
-    {% for users in images %}
+    {% for users in images_item%}
       <div class="col-sm-6 col-md-3">
           <h1>{{users.username}}</h1>
+          <img src="{{images_item.image_path.url}}" alt="">
       </div>
     {% endfor %}
   {% endif %}

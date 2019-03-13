@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'friendship',
+    'crispy_forms',
     'bootstrap3',
     'tinymce',
     'gram.apps.GramConfig',
@@ -140,3 +142,4 @@ EMAIL_PORT = 587
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER='sarahtuitoek@gmail.com'
 EMAIL_HOST_PASSWORD='sarahjt12'
+CRISPY_TEMPLATE_PACK = 'uni_form'
