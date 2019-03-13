@@ -15,3 +15,15 @@ li a span{
 .panel .panel-heading .username{
   color:white;
 }
+a{
+  color:black;
+}
+body{
+  overflow-x: hidden;
+}
+.row .panel{
+  box-shadow: 5px 10px;
+}
+.nav{
+  position: fixed;
+}

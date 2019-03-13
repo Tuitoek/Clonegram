@@ -9,6 +9,6 @@ li a span{
   color:black;
   font-size: 30px;
 }
-.row .col-md-5{
-  float:right;
+body{
+  overflow-x: hidden;
 }
