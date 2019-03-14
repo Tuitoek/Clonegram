@@ -35,4 +35,4 @@ class PhotoForm(forms.ModelForm):
 
    class Meta:
        model = Image
-       fields = ['image_path']
+       fields = ['image_path','image_caption']

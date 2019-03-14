@@ -9,7 +9,10 @@ li a span{
   color:black;
   font-size: 30px;
 }
-.panel{
+.row{
+  align-self: center;
+}
+.row .col-md-5 .panel .panel-body{
   background-color: black;
 }
 .panel .panel-heading .username{

@@ -54,8 +54,9 @@ def activate(request, uidb64, token):
         return HttpResponse('<h1 style="color:red">Activation link is invalid!</h1>')
 
 @login_required(login_url='/accounts/login/')
-def profile(request):
-    posts=Image.objects.all()
+
+def edit_dp(request):
+    img = Image.objects.all()
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST,instance=request.user)
         p_form = ProfileUpdateForm(request.POST,request.FILES,instance=request.user.profile)
@@ -70,7 +71,12 @@ def profile(request):
         'u_form': u_form,
         'p_form': p_form
     }
-    return render(request, 'profile.html', context,{"posts":posts})
+    return render(request, 'editdp.html',context,{'img':img })
+
+def profile(request):
+    img = Image.objects.all()
+
+    return render(request, 'profile.html',{'img':img })
 
 
 def test_redirect(request):
@@ -78,24 +84,35 @@ def test_redirect(request):
 
 @login_required(login_url='/accounts/login/')
 def home2(request):
-    images = Image.objects.all()
+    # images = Image.objects.all()
+    # print(images)
+    # if request.method == 'POST':
+    #     comment_form = CommentsForm(request.POST)
+    #     if  comment_form.is_valid():
+    #         comment = comment_form.save(commit=False)
+    #         comment.save()
+    #         return render(request,'home2.html',{"comment":comment})
+    # else:
+    #     comment_form = CommentsForm()
+    # context = {
+    #     'comment_form': comment_form,
+    # }
+    img = Image.objects.all()
+    return render(request, 'home2.html',{'img':img })
+    #return render(request, 'home2.html',context, {"images": images, 'img':img })
+
+
+def image_form_upload(request):
     if request.method == 'POST':
-        post_form = PhotoForm(request.POST,request.FILES)
-        comment_form = CommentsForm(request.POST)
-        if post_form.is_valid() and comment_form.is_valid():
-            post = post_form.save(commit=False)
-            post.save()
-            comment = comment_form.save(commit=False)
-            comment.save()
-            return render(request,'home2.html',{"comment":comment})
+        form = PhotoForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return render(request,'home2.html')
     else:
-        post_form = PhotoForm()
-        comment_form = CommentsForm()
-    context = {
-        'post_form': post_form,
-        'comment_form': comment_form,
-    }
-    return render(request, 'home2.html',context, {"images": images})
+        form = PhotoForm()
+    return render(request, 'upload.html', {
+        'form': form
+    })
 
 
 def searchresults(request):

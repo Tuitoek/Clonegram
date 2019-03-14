@@ -10,7 +10,9 @@ urlpatterns = [
     url('^$', views.landing, name='landing'),
     url('^home/', views.home2, name='home'),
     url('^profile/', views.profile, name='profile'),
+    url('^edit/', views.edit_dp, name='edit_dp'),
     url('^search/', views.searchresults, name='searchresults'),
+    url('^upload/', views.image_form_upload, name='upload'),
     url('^register/', views.register, name='register'),
     url(r'^accounts/', include('registration.backends.simple.urls')),
     url('^accounts/login/$', auth_views.LoginView.as_view(

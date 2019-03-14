@@ -44,63 +44,64 @@
       <p>@{{user.username}}</p>
       <p>{{user.bio}}</p>
       <div class="show" style="display:inline-block;">
-        <p>1<br>Posts</p>
+        <p>{{img.count}}<br>Posts</p>
         <p>{{followers}}0<br>Followers </p>
         <p>{{following}}0<br>Following </p>
       </div>
     </div>
-    <div class="col-md-4">
-      <form method="POST" enctype="multipart/form-data">
-        {%csrf_token%}
-        <fieldset class="form-group">
-          <legend class="border-bottom mb-4">Profile Info</legend>
-          {{u_form|crispy}}
-          {{p_form|crispy}}
-        </fieldset>
-        <div class="form-group">
-          <button type="submit" class="btn btn-outline-info" name="button">Update</button>
-        </div>
 
-      </form>
+    <div class="form-group">
+      <a href="/edit">Edit profile</a>
     </div>
 
-  </div>
-
-  <hr style="color:black;">
-  <h3>Posts</h3>
-  <div class="row">
-    <div class="row" style="display:flex;justify-content:space-evenly">
-      <div class="col-md-5" align="center">
-        <div class="panel" style="background-color:black;">
-          <div class="panel-heading">
-            <div style="display:flex;justify-content:flex-start;">
-              <img style="border-radius:70%;" src="{{user.profile.dpicture.url}}" height=30px width=30px>
-              <p style="color:white;"> @{{user.username}}</p>
-            </div>
-
-          </div>
-          <div class="panel-body">
-            <img src="{{user.image.image_path.url}}" height=500px width=500px>
-            <p>{{images_item.bio}}</p>
-          </div>
-          <div class="panel-footer" style="display:flex;justify-content:space-evenly;">
-
-            <p>Comments {{user.image.comments}}</p>
-            <form method="POST" enctype="multipart/form-data">
-              {%csrf_token%}
-              <fieldset class="form-group">
-                {{comment_form|crispy}}
-              </fieldset>
-              <div class="form-group">
-                <button type="submit" class="btn btn-outline-info" name="button">Post Comment</button>
+    <hr style="color:black;">
+    <h3>Posts</h3>
+    <div class="container" align="center">
+      <div class="row" align="center">
+        <div class="col-md-5" align="center">
+          {% for imgx in img %}
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <div style="display:flex;justify-content:flex-start;">
+                <img style="border-radius:70%;" src="{{user.profile.dpicture.url}}" height=30px width=30px>
+                <p style="color:black;"> @{{user.username}}</p>
               </div>
+            </div>
+            <div class="panel-body">
+              <img src="{{imgx.image_path.url}}" alt="" width="300" height="300">
+            </div>
+            <p style="float:left;">Caption:{{imgx.image_caption}}</p>
+            <br>
+            <div style="display:flex;justify-content:space-evenly;">
+              <p>Comments {{imgx.comments}}</p>
+              <form method="POST" enctype="multipart/form-data">
+                {%csrf_token%}
+                <fieldset class="form-group">
+                  {{comment_form.as_p}}
+                </fieldset>
+                <div class="form-group">
+                  <button type="submit" class="btn btn-outline-info" name="button">Post Comment</button>
+                </div>
+
+              </form>
+
+              <i style="font-size:15px;" class="glyphicon glyphicon-heart-empty"><br>{{imgx.likes}}likes</i>
+              <i style="font-size:15px;" class="glyphicon glyphicon-bookmark"></i>
+            </div>
           </div>
 
-          {%endblock%}
-          {% block scripts %}
-          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-          {% bootstrap_javascript %}
-          {%endblock%}
+          {% endfor %}
+        </div>
+
+      </div>
+
+    </div>
+
+    {%endblock%}
+    {% block scripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    {% bootstrap_javascript %}
+    {%endblock%}
 
 </body>
 

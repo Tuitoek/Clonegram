@@ -29,12 +29,10 @@ class Profile(models.Model):
         return users
 
 class Image(models.Model):
-    user = models.OneToOneField(User)
     image_name=models.CharField(max_length = 20)
     image_caption=models.CharField(max_length = 1000)
     likes=models.CharField(max_length = 1000)
     comments=models.CharField(max_length = 250)
-    username=models.ForeignKey(Profile)
     image_path=models.ImageField(upload_to = 'images/')
     pub_date=models.DateTimeField(auto_now_add = True)
 

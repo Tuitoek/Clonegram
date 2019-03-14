@@ -21,6 +21,8 @@
       <a style="color:black;" class="navbar-brand" href="/home"><span class="glyphicon glyphicon-camera">| CloneGram</span></a>
       <a style="color:black;" class="navbar-brand" href="/profile"><span class="glyphicon glyphicon-user">User</span></a>
       <a style="color:black;" class="navbar-brand" href="#"><span class="glyphicon glyphicon-heart">Likes</span> </a>
+      <a style="color:black;" class="navbar-brand" href="/upload"><span class="glyphicon glyphicon-add">Upload</span> </a>
+
       <a style="color:black;" class="navbar-brand" href="/">Logout</a>
       <div class="col-sm-4 col-md-4 navbar-right">
         <form class="navbar-form" role="search" action="">
@@ -43,30 +45,30 @@
   <br>
   <br>
   <br>
-  <div class="row" style="display:flex;justify-content:space-between">
-    <div class="col-md-6" align="center" style="margin:10px;">
 
-      <div class="panel">
-
-        <div class="panel-heading">
-          <div style="display:flex;justify-content:flex-start;">
+<div>
+  <div class="container" align="center">
+    <div class="row" align="center">
+      <div class="col-md-5" align="center">
+        {% for imgx in img %}
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <div style="display:flex;justify-content:flex-start;">
             <img style="border-radius:70%;" src="{{user.profile.dpicture.url}}" height=30px width=30px>
-            <p style="color:white;"> @{{user.username}}</p>
+            <p style="color:black;"> @{{user.username}}</p>
           </div>
-        </div>
-        <div class="panel-body">
-          <img src="{{user.image.image_path.url}}" height=500px width=500px>
-          <p style="color:white;">{{images_item.bio}}</p>
-        </div>
-        <div class="panel-footer">
-          <p style="float:left;">Caption:{{user.image.image_caption}}</p>
+          </div>
+          <div class="panel-body">
+              <img src="{{imgx.image_path.url}}" alt="" width="300" height="300">
+          </div>
+          <p style="float:left;">Caption:{{imgx.image_caption}}</p>
           <br>
           <div style="display:flex;justify-content:space-evenly;">
-            <p>Comments {{image_item.comments}}</p>
+            <p>Comments {{imgx.comments}}</p>
             <form method="POST" enctype="multipart/form-data">
               {%csrf_token%}
               <fieldset class="form-group">
-                {{comment_form|crispy}}
+                {{comment_form.as_p}}
               </fieldset>
               <div class="form-group">
                 <button type="submit" class="btn btn-outline-info" name="button">Post Comment</button>
@@ -74,34 +76,20 @@
 
             </form>
 
-            <i style="font-size:15px;" class="glyphicon glyphicon-heart-empty"><br>{{image_item.likes}}likes</i>
+            <i style="font-size:15px;" class="glyphicon glyphicon-heart-empty"><br>{{imgx.likes}}likes</i>
             <i style="font-size:15px;" class="glyphicon glyphicon-bookmark"></i>
           </div>
-
-
         </div>
+
+        {% endfor %}
       </div>
-    </div>
-    <div class="col-md-10" align="center">
-      <form method="POST" enctype="multipart/form-data">
-        {%csrf_token%}
-        <fieldset class="form-group">
-          <legend class="border-bottom mb-4">Post Image</legend>
-          {{post_form|crispy}}
-        </fieldset>
-        <div class="form-group">
-          <button type="submit" class="btn btn-outline-info" name="button">Post Picture</button>
-        </div>
 
-      </form>
     </div>
+
+</div>
   </div>
-  {% endblock %}
-  {% block scripts %}
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  {% bootstrap_javascript %}
-  {%endblock%}
 
+  {% endblock %}
 </body>
 
 </html>
