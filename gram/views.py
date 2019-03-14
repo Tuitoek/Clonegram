@@ -6,7 +6,7 @@ from .forms import SignUpForm, CommentsForm, ProfileUpdateForm, UserUpdateForm,P
 from django.forms import modelformset_factory
 
 
-@login_required(login_url='/accounts/login/')
+
 # Create your views here.
 def landing(request):
     return render(request, 'landing.html')
@@ -53,7 +53,7 @@ def activate(request, uidb64, token):
     else:
         return HttpResponse('<h1 style="color:red">Activation link is invalid!</h1>')
 
-
+@login_required(login_url='/accounts/login/')
 def profile(request):
     posts=Image.objects.all()
     if request.method == 'POST':
@@ -76,7 +76,7 @@ def profile(request):
 def test_redirect(request):
     return redirect("admin/")
 
-
+@login_required(login_url='/accounts/login/')
 def home2(request):
     images = Image.objects.all()
     if request.method == 'POST':
